@@ -1,0 +1,45 @@
+项目中出现的中文乱码问题：
+	1.乱码经常出现在什么位置？
+		数据“传递”过程中的乱码
+		数据“展示”过程中的乱码
+		数据“保存”过程中的乱码
+	
+	2.数据保存过程中的乱码？
+		- 最终保存到数据库中的时候，数据出现乱码
+		- 导致数据保存过程中的乱码包括一下两种情况
+			一、保存前数据就是乱码，保存到数据库中就一定是乱码
+			二、保存前数据不是乱码，但由于数据库不支持简体中文，保存后出现乱码
+			
+	3.数据展示过程中的乱码？
+		- 最终显示在网页上的数据出现中文乱码
+		- 怎么解决？
+			一、设置响应的内容类型，以及对于的字符编码方式(通过java程序)
+				response.setContentType("text/html;charset=utf-8");
+			二、<meta content="text/html;charset=utf-8">或<meta charset="utf-8">或者改变JDE的默认编码方式(直接访问静态页面)
+			
+	4.数据传递过程中的乱码？
+		- 将数据从浏览器发送给服务器的时候，服务器接收到的数据是乱码
+		- 浏览器是这样发送数据给服务器的：dname=%E5%E8%82%B8%E9%BA%A8%9C
+		- 这是对应的ISO-8859-1的编码
+		- ISO-8859-1是国际标准码，不支持中文编码，兼容ASCII码，有被称为latin1编码
+		- 不管哪个国家的文字，在浏览器发送给服务器是，都会采用ISO-8859-1的编码方式发送。
+		- 发送给web服务器之后，web服务器不知道这些数据之前是什么类型的文字，所以服务器接收到的数据出现乱码
+		- 怎么解决？
+			一、万能解决方式，既能解决POST请求乱码，又能解决GET请求乱码
+				先将服务器中接收到的数据采用ISO-8859-1的方法解码，再用一种支持中文的编码方式重写编码组装(要和浏览器编码方式相同)
+				String StringName = req.getParameter("name");
+				byte[] bytes = StringName.getBytes("ISO-8859-1");//解码
+				StringName = new String(bytes,"utf-8");//编码
+			二、只支持POST请求【对请求体编码】
+				request.setCharacterEncoding("utf-8");//请求体中的数据采用JDK的编码的方式解码，要在获取数据之前
+				String name = request.getParameter("name");
+				
+			三、专门解决GET请求的乱码问题，只对请求行进行编码
+				修改CATALINA_HOME/conf/server.xml文件
+				<Connector port="8080" 添加URIEncoding="utf-8"/>
+				Connector标签中都可以写什么属性？
+					帮助文档：CATALINA_HOME\webapps\docs\config\http.html
+					port 端口
+					maxThreads Tomcat服务器最高支持多少个线程，默认200
+					URIEncoding 设置请求行上的编码方式，解决GET请求乱码
+	
