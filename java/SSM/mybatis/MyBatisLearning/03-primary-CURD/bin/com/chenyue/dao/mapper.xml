@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test">
+<!-- 	parameterType="Student"可以省略 -->
+	<insert id="insertStudent" >
+<!-- 	<insert id="insertStudent" parameterType="Student"> -->
+		insert into student(name,age,score) values(#{name},#{age},#{score})
+	</insert>
+	
+	<insert id="insertStudentCacheId" >
+		insert into student(name,age,score) values(#{name},#{age},#{score})
+<!--    keyProperty="id":查询结果自动赋值给id
+		order:ID的生成和insert语句的先后顺序关系 -->
+		<selectKey resultType="integer" keyProperty="id" order="AFTER">
+			select @@identity
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteStudentById">
+		delete from student where id=#{xxx}    <!-- 这里的#{}仅仅是个站位符，里面放什么都可以 -->
+	</delete>
+	
+	<update id="updateStudent">
+		update student set name=#{name}, age=#{age}, score=#{score} where id=#{id}		
+	</update>
+	
+	<select id="selectAllStudentsMap" resultType="Student">
+		select id, name, age, score from student
+	</select>
+	
+	<select id="selectStudentById" resultType="Student">
+		select id, name, age, score from student where id=#{XXX}
+	</select>
+		
+	<select id="selectStudentByName" resultType="Student">
+		<!-- select id, name, age, score from student where name like concat('%',#{XXX},'%') -->
+		select id, name, age, score from student where name like '%' #{XXX} '%'
+		<!-- select id, name, age, score from student where name like '%${value}%' -->
+	</select>
+</mapper>

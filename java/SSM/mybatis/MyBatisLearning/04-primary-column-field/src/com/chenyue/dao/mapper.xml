@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test">
+<!-- 	parameterType="Student"可以省略 -->
+	<insert id="insertStudent" >
+<!-- 	<insert id="insertStudent" parameterType="Student"> -->
+		insert into student(tname,tage,tscore) values(#{name},#{age},#{score})
+	</insert>
+	
+	<insert id="insertStudentCacheId" >
+		insert into student(tname,tage,tscore) values(#{name},#{age},#{score})
+<!--    keyProperty="id":查询结果自动赋值给id
+		order:ID的生成和insert语句的先后顺序关系 -->
+		<selectKey resultType="integer" keyProperty="id" order="AFTER">
+			select @@identity
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteStudentById">
+		delete from student where tid=#{xxx}    <!-- 这里的#{}仅仅是个站位符，里面放什么都可以 -->
+	</delete>
+	
+	<update id="updateStudent">
+		update student set tname=#{name}, tage=#{age}, tscore=#{score} where tid=#{id}		
+	</update>
+	
+	<resultMap type="Student" id="studentMapper">
+		<id column="tid" property="id"/>
+		<result column="tname" property="name"/>
+		<result column="tage" property="age"/>
+	</resultMap>
+	
+	<select id="selectAllStudents" resultMap="studentMapper">
+		select tid, tname, tage, score from student
+	</select>
+	<select id="selectAllStudentsMap" resultMap="studentMapper">
+		select tid, tname, tage, score from student
+	</select>
+	
+	<select id="selectStudentById" resultMap="studentMapper">
+		select tid, tname, tage, score from student where tid=#{XXX}
+	</select>
+		
+	<select id="selectStudentByName" resultType="Student">
+		<!-- select id, name, age, score from student where name like concat('%',#{XXX},'%') -->
+		select tid id, tname name, tage age, score from student where tname like '%' #{XXX} '%'
+		<!-- select id, name, age, score from student where name like '%${value}%' -->
+	</select>
+</mapper>
