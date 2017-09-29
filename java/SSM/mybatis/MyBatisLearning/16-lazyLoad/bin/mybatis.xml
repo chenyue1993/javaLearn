@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 注册DB链接四要素属性 -->
+	<properties resource="jdbc_mysql.properties"/>
+	
+	<!-- 设置 整个应用所使用的常量-->
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true"></setting>
+		<setting name="aggressiveLazyLoading" value="false"></setting>
+	</settings>
+		
+	<!-- 定义类型别名 -->
+	<typeAliases>
+		<!-- <typeAlias type="com.chenyue.beans.Student" alias="Student"/> -->
+		<!-- 将指定保重所有的简单类名当做其别名 -->
+		<package name="com.chenyue.beans"/>
+	</typeAliases>	
+	
+	<!-- 配置运行环境 -->
+	<environments default="mysqlEM">
+		<environment id="mysqlEM">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}"></property>
+				<property name="url" value="${jdbc.url}"></property>
+				<property name="username" value="${jdbc.username}"></property>
+				<property name="password" value="${jdbc.password}"></property>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 注册映射文件 -->
+	<mappers>
+		<mapper resource="com/chenyue/dao/mapper.xml"/>
+	</mappers>
+	
+	
+</configuration>
