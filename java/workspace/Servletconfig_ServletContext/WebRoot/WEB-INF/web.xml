@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<context-param>
+		<param-name>username</param-name>
+		<param-value>张三</param-value>
+	</context-param>
+	
+	<servlet>
+		<servlet-name>AServlet</servlet-name>
+		<servlet-class>com.chenyue.servlet.AServlet</servlet-class>
+		<init-param>
+			<param-name>url</param-name>
+			<param-value>jdbc:mysql://localhost:3306/cloud</param-value>
+		</init-param>
+		<init-param>
+			<param-name>user</param-name>
+			<param-value>root</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AServlet</servlet-name>
+		<url-pattern>/a</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>BServlet</servlet-name>
+		<servlet-class>com.chenyue.servlet.BServlet</servlet-class>
+		<init-param>
+			<param-name>url</param-name>
+			<param-value>jdbc:mysql://localhost:3306/cloud</param-value>
+		</init-param>
+		<init-param>
+			<param-name>user</param-name>
+			<param-value>root</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BServlet</servlet-name>
+		<url-pattern>/b</url-pattern>
+	</servlet-mapping>
+</web-app>

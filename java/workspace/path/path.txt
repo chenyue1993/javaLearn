@@ -1,0 +1,31 @@
+url-pattern的编写方式和path的总结
+	1.路径的编写形式：
+		- <a href="/项目名/资源路径">
+		- <form action="/项目名/资源路径"></form>
+		- 重定向：response.sendRedirect("/项目名/资源路径")
+		- 转发：request.getRequestDispatcher("/资源路径").forward(request,response)
+		- 欢迎页面
+			<welcome-file-list>
+				<welcome-file>资源路径</welcome-file>
+			</welcome-file-list>
+		- <servlet-mapping>
+			<servlet-name></servlet-name>
+			<url-pattern>/资源路径</url-pattern>
+		  </servlet-mapping>
+		- Cookie设置path
+			cookie.setPath("/项目名/资源路径")
+		- ServletCo|ntext
+			ServletContext application = config.getServletContext()
+			application.getRealPath("/WEB-INF/classes/db.properties")
+			application.getRealPath("/资源路径")
+			
+	2.url-pattern的编写方式
+		-精确匹配
+			<url-pattern>/hello</url-pattern>
+			<url-pattern>/system/hello</url-pattern>
+		- 扩展匹配	
+			<url-pattern>/abd/*</url-pattern>
+		- 后缀匹配
+			<url-pattern>*.do</url-pattern>
+		- 全部匹配
+			<url-pattern>/*</url-pattern>

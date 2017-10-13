@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="forward_redirect"
+  id="myeclipse.1488246028073"
+  context-root="/forward_redirect"
+  j2ee-spec="5.0"
+  archive="forward_redirect.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

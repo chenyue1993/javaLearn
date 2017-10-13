@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Servletconfig_ServletContext"
+  id="myeclipse.1487640169530"
+  context-root="/Servletconfig_ServletContext"
+  j2ee-spec="5.0"
+  archive="Servletconfig_ServletContext.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
