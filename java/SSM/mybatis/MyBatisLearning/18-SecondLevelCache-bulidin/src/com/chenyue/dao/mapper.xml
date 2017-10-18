@@ -29,11 +29,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 <select id="selectStudentById" resultType="Student">
 	 	select tid id, tname name, tage age, score  from student where tid = #{xx}
 	 </select>
-	 <select id="selectStudentById1" resultType="Student">
+	 
+	<!--  对当前二级缓存的局部关闭 -->
+	 <select id="selectStudentById1" resultType="Student" useCache="false">
 	 	select tid id, tname name, tage age, score  from student where tid = #{xx}
 	 </select>
 	 
-	 <insert id="saveStudent">
-	 	insert into student(tname name, tage age, score) values(#{name}, #{age} ,#{score})
+	 <insert id="saveStudent" parameterType="Student">
+	 	insert into student(tname, tage, score) values(#{name}, #{age} ,#{score})
 	 </insert>
 </mapper>

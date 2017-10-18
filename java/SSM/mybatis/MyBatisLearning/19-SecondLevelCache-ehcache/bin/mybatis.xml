@@ -7,9 +7,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<properties resource="jdbc_mysql.properties"/>
 	
 	<!-- 关闭二级缓存 -->
-	<settings>
+<!-- 	<settings>
 		<setting name="cacheEnabled" value="false"/>
-	</settings>
+	</settings> -->
 	
 	<!-- 定义类型别名 -->
 	<typeAliases>

@@ -63,7 +63,7 @@ public class MyTest {
 	@Test
 	public void testSelectStudentByid(){
 		student = dao.selectStudentById(1);
-		Student student1 = dao.selectStudentById(2);
+		Student student1 = dao.selectStudentById(1);
 		System.out.println(student+"---"+student1);
 	}
 	
@@ -125,5 +125,11 @@ public class MyTest {
 		
 		Student student3 = dao.selectStudentById(2);
 		System.out.println(student3);			
+	}
+	
+	@Test
+	public void test(){
+		String path = System.getProperty("java.io.tmpdir");
+		System.out.println(path);
 	}
 }

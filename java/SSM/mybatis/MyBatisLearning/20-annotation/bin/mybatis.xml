@@ -5,12 +5,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<!-- 注册DB链接四要素属性 -->
 	<properties resource="jdbc_mysql.properties"/>
-	
-	<!-- 关闭二级缓存 -->
-	<settings>
-		<setting name="cacheEnabled" value="false"/>
-	</settings>
-	
 	<!-- 定义类型别名 -->
 	<typeAliases>
 		<!-- <typeAlias type="com.chenyue.beans.Student" alias="Student"/> -->
@@ -33,7 +27,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<!-- 注册映射文件 -->
 	<mappers>
-		<mapper resource="com/chenyue/dao/mapper.xml"/>
+		<!-- <mapper resource="com/chenyue/dao/mapper.xml"/> -->
+		<package name="com.chenyue.dao"/>
 	</mappers>
 	
 	
