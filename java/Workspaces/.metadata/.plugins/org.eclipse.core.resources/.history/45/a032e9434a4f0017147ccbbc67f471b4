@@ -1,0 +1,9 @@
+package com.chenyue.factory;
+
+import com.chenyue.service.SomeService;
+
+public class MyCGLIBFactory {
+	public SomeService MyCGLIBCreator(){
+		
+	}
+}

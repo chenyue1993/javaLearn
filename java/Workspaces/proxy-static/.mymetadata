@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="proxy-static"
+  id="myeclipse.1495768634126"
+  context-root="/proxy-static"
+  j2ee-spec="5.0"
+  archive="proxy-static.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

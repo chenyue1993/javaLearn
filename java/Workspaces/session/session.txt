@@ -1,0 +1,6 @@
+HttpSession常用方法
+	HttpSession session = request.getSession();			获取当前session，获取不到，新建session
+	HttpSession session = request.getSession(true);		获取当前session，获取不到，新建session
+	HttpSession session = request.getSession(false);    获取当前session，获取不到，返回null	
+	
+	void session.invalidate()	销毁session

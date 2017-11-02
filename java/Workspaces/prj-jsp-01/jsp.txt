@@ -1,0 +1,71 @@
+1.JSP是什么？
+	- JavaServer Pages
+		基于java语言实现的服务器端页面
+		JSP是JavaEE规范之一
+		
+2.jsp文件通常放在什么位置？
+	- jsp可以放在WEB-INF目录外，目前是这样做的
+		在时间开发中，有很多项目是将jsp放到WBE_INF目录中，保护jsp
+	- WEB-INF目录中的数据是相对安全的
+	
+3.jsp文件后缀是什么？
+	- 默认的是.jsp，但是jsp文件的后缀也是可以修改的，通过修改CATALINA_HOME/conf/web.xml文件
+	
+4.js和jsp的区别
+	-js 	JavaScript，运行在浏览器中，和服务器没有关系，和java也没有关系
+	-jsp	JavaServer Page，运行在服务器中，jsp底层就是java程序，运行在JVM中
+	
+5.JSP的执行原理：
+	- 浏览器上访问的路径是.jsp结尾，访问的是某个jsp文件，其实底层运行的是jsp对应的java程序
+	- tomcat服务器负责将.jsp文件翻译成.java源文件，并且将.java源文件编译成.class文件
+	           访问jsp，其实底层还是执行了.class文件中的程序
+	- tomcat服务器内置了一个jsp翻译引擎，专门负责翻译jsp文件，编译java源文件
+		index.jsp会被翻译成index_jsp.java，编译成index_jsp.class
+	- index_jsp这个类继承了HttpJspBase，而HttpJspBase继承了HttpServlet
+		jsp就是Servlet，只不过职责不同，jsp的强项是做页面展示
+		
+6.在jsp文件中编写的HTML,CSS,JavaScript只是普通的字符串，被翻译到service方法中的out.write("翻译到这")中
+
+7.jsp文件修改后不需要重新部署，也不需要从新启动TOMCAT服务器
+
+8.第一次访问jsp的时候为什么这么慢？
+	- 启动jsp翻译引擎
+	- 需要翻译和编译过程
+	- 需要创建servlet对象
+		init方法调用
+	- service方法调用....
+      第二次访问jsp的时候为什么变快？
+  	- 不需要重新翻译和编译
+  	- 不需要创建servlet对象
+  	- 直接调用servlet对象的service方法
+  jsp也是单例多线程环境下运行的一个Servlet对象
+  
+9.jsp在什么时候会被重新翻译？
+	jsp在修改之后会把重新翻译
+	怎么确定jsp被修改了呢？
+		tomcat会记录jsp文件的最后修改时间
+		
+10.jsp语法
+	注释
+		<%--	--%>
+	scriptlet:jsp小脚本
+		<%     %>  ---> 写在service中
+	declaration:声明
+		<%!    %> --->写在service外
+	expression:表达式
+		<%=    %>  --->  out.print();
+		我是<%=name%>等同于out.print("我是"+name);
+	directive:指令
+		<%@	   %>
+	动作
+		<jsp:动作名 属性名=属性值 属性属性值...>
+11.JSP主要是完成页面展示，最好在JSP中少写java源代码
+	以后会通过EL表达式+JSTL标签来代替JSP中的java源代码
+	当然，使用某些动作也能代替java源代码
+	
+12.setAttribute(key,value)设置属性
+   getAttribute(key,value)获取属性 
+	
+	
+	
+	

@@ -1,0 +1,19 @@
+package test;
+
+import beans.Animal;
+import beans.Cat;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		Cat cat = new Cat();
+		cat.setName("Ñ©±Ì");
+		System.out.println(cat.getName());
+		
+		Animal animal = new Animal();
+		System.err.println(animal.getName());
+		
+		Animal animal1 = new Cat();
+		
+	}
+}

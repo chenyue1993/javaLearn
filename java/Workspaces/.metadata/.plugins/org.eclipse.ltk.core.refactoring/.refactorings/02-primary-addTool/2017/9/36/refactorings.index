@@ -1,0 +1,2 @@
+1504855137216	Convert local variable 'sqlSession' to field
+1504855844244	Convert local variable 'sqlSessionFactory' to field

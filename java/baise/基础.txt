@@ -1,0 +1,28 @@
+1.一个object对象8个字节，一个字节（byte）8位（bit）
+
+2.内存空间：堆heap，栈stack，方法区
+
+3.面向对象的三大特征：封装，继承，多态
+
+4.封装：先装(将多个变量装到一个变量/对象中)再封(private)
+
+5.继承的子类内存空间分配
+	- 子类在堆中复制了父类的成员变量
+	- 子类对于父类的方法使用权限的继承
+	
+6.多态：相同的引用调用相同的方法出现不同的结果
+	- 发送的条件：
+		- 继承
+		- 重写
+		- 上转型upCasting:父类的引用指向子类的对象
+	- 下转型：
+		- 真下转型
+			- Parent p = new Parent();
+			- Children c = (children)p;
+			- 会发生ClassCastException,java中不允许真下转型
+		- 假下转型
+			- Parent p = new Children();
+			- Children c = (children)p;
+		- if(p instanceif c){ ... }
+		
+		http://s3.amazonaws.com/dist.springframework.org/release/SPR/spring-framework-3.0.2.RELEASE-dependencies.zip

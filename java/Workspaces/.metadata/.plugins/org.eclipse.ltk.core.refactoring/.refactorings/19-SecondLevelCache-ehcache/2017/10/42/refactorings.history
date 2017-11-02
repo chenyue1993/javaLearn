@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;19-SecondLevelCache-ehcache/src/ehcache-failsafe——XML的配置.xml&apos; to &apos;ehcache.xml&apos;" description="Rename resource &apos;ehcache-failsafe——XML的配置.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/ehcache-failsafe——XML的配置.xml" name="ehcache.xml" stamp="1508214418824" updateReferences="true"/>
+</session>

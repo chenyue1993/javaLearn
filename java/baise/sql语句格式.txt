@@ -1,0 +1,55 @@
+1.SQL分类
+	- DDL(Date Definition Language)		:定义（对表结构变化）
+	- DML(Date Manipulation Language)	:操纵 select
+	- DQL(Date Query Language)			:修改 insert ,update ,delete
+	- TCL(Transaction Control Language)	:事务控制（有效性）commit ,rollback
+	- DCL(Date Control Language)		:数据控制（授权）
+	
+2.CRUD操作
+	- 增：create
+		INSERT INTO 
+			tableName(field,field...) 
+		VALUES	
+			(value,value...)
+	- 删：delete
+		DELETE FROM 
+			tableName 
+		WHERE 
+			condition
+	- 改：update
+		UPDATE 
+			tableName 
+		SET 
+			field = value ,...
+	- 查：read
+		SELECT 				5.查询结果
+			field ,... 
+		FROM 				1.找表
+			tableName
+		WHERE				2.过滤
+			condition	is (not) null ,(not) in(...)
+		GROUP BY			3.分组
+			...
+		HAVING				4.再过滤
+			...		
+		ORDER BY			6.排序输出
+			...		asc(默认升序) desc(降序)
+			
+多表查询
+	- 内连接  ... (inner) join ... on
+		table1 INNER JOIN table2 ON condition
+	- 外连接  ... left/right/full (outer) join ... on
+		- 左外连接	... left (outer) join ... on
+		- 右外连接	... right (outer) join ... on
+		- 全连接	... full (outer) join ... on\
+	- 自连接 ： 用表别名
+	
+事务；Transaction
+	A- 原子性(Atomicity)
+	C- 一致性(Consistency)
+	I- 隔离性(Isolation)：隔离性由低到高
+		- read uncommitted	读未提交
+		- read committed	读已提交
+		- repeatable read	可重复读
+		- serializable		串行化
+	D- 持久性(Durability)

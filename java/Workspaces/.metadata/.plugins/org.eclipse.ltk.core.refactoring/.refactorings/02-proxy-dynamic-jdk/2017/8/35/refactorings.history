@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;com.chenyue.service&apos; to &apos;04-proxy-dymanic-cglib/src&apos;&#x0D;&#x0A;- Original project: &apos;02-proxy-dynamic-jdk&apos;&#x0D;&#x0A;- Destination element: &apos;04-proxy-dymanic-cglib/src&apos;&#x0D;&#x0A;- Original element: &apos;02-proxy-dynamic-jdk/src/com.chenyue.service&apos;" description="Copy package" destination="=04-proxy-dymanic-cglib/src" element1="/src&lt;com.chenyue.service" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1504056583506" version="1.0"/>
+</session>

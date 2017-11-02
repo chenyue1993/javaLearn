@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MyTest">
+	<resultMap id="mapperStudent" type="Student">
+		<id column="tid" property="id"/>
+		<result column="tname" property="name"/>
+		<result column="tage" property="age"/>
+	</resultMap>
+
+	<insert id="savaStudent">
+		insert into student(tname, tage, score) values(#{name}, #{age} ,#{score})
+	</insert>
+	
+	<insert id="saveStudentCacheId">
+		insert into student(tname, tage, score) values(#{name}, #{age} ,#{score})
+		<selectKey>
+			select @@identity
+		</selectKey>
+	</insert>
+	
+	<delete id="removeStudentById">
+		delete from student where tid = #{id}
+	</delete>
+	
+	<update id="updateStudentById">
+		update student set tname=#{name}, tage=#{age}, score=#{score} where tid=#{id}
+	</update>
+	
+	<select id="selectAllStudents" resultMap="mapperStudent">
+		select * from student
+	</select>
+	
+	<select id="selectStudentByName" resultMap="mapperStudent">
+		select * from student where tname like '%' #{name} '%'
+	</select>
+	
+	<select id="selectAllStudentsMap" resultMap="mapperStudent">
+		select * from student
+	</select>
+	
+	<select id="selectStudentById" resultMap="mapperStudent">
+		select * from student where tid=#{id}
+	</select>
+	
+</mapper>
+

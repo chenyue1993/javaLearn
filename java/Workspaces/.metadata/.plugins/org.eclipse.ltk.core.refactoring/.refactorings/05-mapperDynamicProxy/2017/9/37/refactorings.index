@@ -1,0 +1,5 @@
+1505353598125	Delete element
+1505353618124	Delete element
+1505354582186	Extract local variable 'sqlSession'
+1505354664646	Extract local variable 'sqlSession'
+1505354792115	Convert local variable 'sqlSession' to field

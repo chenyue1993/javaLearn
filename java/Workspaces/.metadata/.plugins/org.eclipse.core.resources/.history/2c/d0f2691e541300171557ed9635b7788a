@@ -1,0 +1,83 @@
+package com.chenyue;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Properties;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+public class ListEmp extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		//System.out.println(req.getContextPath());
+		//InputStream in = getClass().getResourceAsStream("/DBconfig.properties");
+		InputStream in  = this.getClass().getClassLoader().getResourceAsStream("DBconfig.properties"); 
+
+		Properties properties = new Properties();
+		properties.load(in);
+		
+		String driver = properties.getProperty("driver");
+		String url = properties.getProperty("url");
+		String DBUsername = properties.getProperty("DBUsername");
+		String DBPassword = properties.getProperty("DBPassword");
+		//System.out.println("driver="+driver+"\nurl="+url+"\nDBUsername="+DBUsername+"\nDBPassword="+DBPassword);
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,DBUsername,DBPassword);
+			String sql = "select empno,ename,hiredate,sal from emp order by sal as desc" ;
+					//" where username=? and password=?";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				String empno = rs.getString("empno");
+				String ename = rs.getString("ename");
+				String hiredate = rs.getString("hiredate");
+				String sal = rs.getString("sal");
+				
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+}

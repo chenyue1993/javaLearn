@@ -1,0 +1,4 @@
+1504762395212	Move compilation unit
+1504763194035	Extract local variable 'sqlSessionFactory'
+1504773731879	Convert local variable 'sqlSession' to field
+1504850996250	Copy file

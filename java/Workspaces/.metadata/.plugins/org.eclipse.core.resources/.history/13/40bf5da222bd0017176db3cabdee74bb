@@ -1,0 +1,11 @@
+package beans;
+
+public class Animal {
+	private String nameString;
+	public int age;
+	
+	
+	public void call(){
+		System.out.println("动物发出吼叫声");
+	}
+}

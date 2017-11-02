@@ -1,0 +1,13 @@
+package beans;
+
+public class Cat extends Animal {
+	//方法重新
+	public void call(){
+		System.out.println("小猫喵喵喵");
+	}
+	
+	public String run(){
+		return "run";
+		
+	}
+}

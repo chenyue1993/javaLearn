@@ -1,0 +1,18 @@
+package com.chenyue.service;
+
+//目标类
+public class SomeService{
+
+
+	public String doFirst() {
+		System.out.println("执行doFirst");
+		return "abcde";
+	}
+
+
+	public void doSecond() {
+		System.out.println("执行doSecond");
+		
+	}
+
+}
