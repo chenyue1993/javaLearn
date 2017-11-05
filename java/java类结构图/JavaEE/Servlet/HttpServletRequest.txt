@@ -1,0 +1,44 @@
+﻿ServletContext是Serlvet上下文对象，该接口中也有这样几个方法：
+	- Object getAttribute(String name)			从ServletContext中读取数据
+	- void setAttribute(String name,Object o)	        向ServletContext中存储数据
+	- void removeAttribute(String name)			移除ServletContext中的数据
+	ServletContext是一个怎样的范围？
+		所有用户共享的一个对象，我们一般把ServletContext变量命名为：application
+		可见这个对象代表一个应用。一个webapp中只有这样一个对象，可见范围极大
+	- RequestDispatcher getRequestDispatcher(String path)
+
+HttpServletRequest常用方法
+
+		- String	getParameter(String name) 
+		- Map<String,String[]>	 getParameterMap() 
+		- Enumeration<String>	getParameterNames() 
+		- String[] getParameterValues(String name) 
+		- String getMethod()                                                                                    
+		
+		- Object getAttribute(String name)			从HttpServletRequest中读取数据
+		- void setAttribute(String name,Object o)	        向HttpServletRequest中存储数据
+		- void removeAttribute(String name)			移除HttpServletRequest中的数据
+		HttpServletRequest是一个怎样的范围？
+			HttpServletRequest类型的变量通常命名为request，表示当前的本次请求
+			一次请求对应一个request对象，请求范围是极小的，request只能完成在同一次请求中传递数据
+		跳转（转发）forward转发是一次请求
+			1.获取请求转发器对象，让转发器对象对象指向某个资源
+			RequestDispatcher dispatcher = request.getRequestDispatcher("url-pattern")
+			2.调用请求转发器	的forward方法即可完成换发
+			dispatcher.forward(request,response)
+		- RequestDispatcher getRequestDispatcher(String path)
+		关于范围对象的选择：
+			ServletContext：应用请求，可以跨用户选择
+			ServletRequest：请求范围，只能在同一个请求中传递数据【可以跨Servlet传递数据，但多个Servlet必须在同一个请求当中】
+			优先选择request
+		
+		- void setCharacterEncoding(String env) 
+		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+		- String getContextPath()		获取上下文路径（webapp路径即项目名）
+		- String getRequestURI()		获取URI（项目名+访问路径）
+		- StringBuffer getRequestURL()		获取URL  协议、IP、端口、webapp路径
+		- String getServletPath()		获取Servlet Path url-pattern
+		- String getRemoteAddr()		获取客户端IP地址
+				
+		- HttpSession getSession()
+		- Cookie[] getCookie()		

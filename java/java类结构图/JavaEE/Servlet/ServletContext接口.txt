@@ -1,0 +1,40 @@
+研究javax.servlet.ServletContext接口
+		1.javax.servlet.ServletContext接口，Servlet规范
+		2.Tomcat服务器对ServletContext接口的实现类的完整类名：org.apache.catalina.core.ApplicationContextFacade
+			javaweb程序员还是只需面向ServletContext接口完成调用方法即可，不需要关心Tomcat具体的实现类
+		
+		3.SerlvetContext到底是什么？什么时候被创建？什么时候被销毁？创建几个？
+			- ServletContext被翻译为Servlet上下文
+			- 一个webapp只有一个web.xml文件， web.xml文件在服务器启动阶段被实例化
+			- 一个webapp只有一个ServletContext对象，ServletContext在服务器启动阶段被实例化
+			- ServletContext在服务器关闭的时候被销毁
+			- ServletContext对应的是web.xml文件，是web.xml文件的代表
+			- ServletContext是所有Servlet对象四周环境的代表【在同一个webapp中，所有的Servlet对象共享同一个“四周环境变量”，该对象就是ServletContext】
+			- 所有用户若想共享同一个数据，可以将这个数据放到ServletContext对象中，最好不要修改
+			
+		4.ServletContext接口中有哪些常用的方法？
+			- Object  getAttribute(String name)							：从ServletContext中获取数据
+			- void  setAttribute(String name,Object object)		：向ServletContext中添加数据
+			- void  removeAttribute(String name)						：移除ServletContext中的数据
+			
+			- String getInitParameter()				---<context-param><param-name><param-value>
+			- Enumeration<String> getInitParameterNames()
+			
+			- String getRealPath(String path)
+			- 
+		5.Servlet、ServletConfig、ServletContext之间的关系
+			- 一个Servlet对象对应一个ServletConfig对象
+			- 所有的Servlet共享一个ServletContext对象
+		
+		6.ServletContext范围可以完成跨用户传递数据。
+		
+总结：
+	到目前为止，所有编写过的路径：
+		1.超链接
+				<a href="/webappname/doSome"></a>
+		2.web.xml中的url-pattern
+				<url-pattern>/doSome</url-pattern>
+		3.form表单中的action
+				<form action="/webappname/doSome"></form>
+		4.String realPath = context.getRealPath("/WEB_INF/resource/doSome")
+		

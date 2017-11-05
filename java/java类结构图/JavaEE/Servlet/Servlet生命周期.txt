@@ -1,0 +1,81 @@
+关于Servlet的生命周期
+	1.什么是生命周期？
+			生命周期表示一个java对象从最初被创建到最后被消毁经历的所有过程
+	2.Servlet对象的生命周期是谁管理的？程序可以干涉吗？
+			javaweb程序员无权干涉，包括Servlet对象的相关方法的调用也无权干涉。
+			Serkvet对象从 创建到调用到销毁，整个过程由WEB容器来管理
+	3.“默认情况下”|，Serlvet对象在WEB服务器启动阶段一般不会被实例化。
+	4.Servlet对象生命周期
+			1）用户在浏览器输入URL：http://127.0.0.100:8080/prj-servlet-03/testLifeCycle
+			2）web容器截取请求路径：/prj-servlet-03/testLifeCycle
+			3）web容器在容器上下文中找请求路径：/prj-servlet-03/testLifeCycle对应的Serlvet对象
+			4）若没有找到对应的Servlet对象
+				4.1）通过web.xml文件中相关的配置，得到请求路径/testLifeCycle对应的Servlet完整类名
+				4.2）通过反射机制，调用Serlvet类的无参构造方法完成Serlvet对象的实例化
+				4.3）web容器调用servlet对象的init方法完成初始化操作
+				4.4）web容器调用Serlvet对象的service方法提供服务
+			5）若找到相应的Servlet对象
+				5.1）web容器直接调用Servlet对象的service方法提供服务
+			6）web容器关闭的时候/webapp重新部署的时候，该Servlet对象长时间没有用户再次访问的时候，web
+					容器会将该Serlvet对象销毁，在销毁之前会调用destroy方法，完成销毁之前的准备。
+	5.总结
+		5.1）Servlet类的构造方法只执行一次
+		5.2）Servlet对象的init方法只执行一次
+		5.3）Servlet对象的service方法，只要用户请求一次，则执行一次
+		5.4）Serlvet对象的destroy方法只执行一次
+	6.注意
+		init方法执行的时候，Servlet对象已经被实例化
+		destroy方法执行的时候，Serlvet方法还没有被销毁，即将被销毁
+	7.Serlvet对象是单例，但不符合单例模式。真单例的构造方法是私有化的，Tomcat服务器是支持多线程的
+		所有Serlvet对象是在单例多线程的环境下运行，那么Servlet对象中若有实例变量，并且实例变量涉及到
+		修改操作，那么Serlvet对象一定会存在现场安全问题，不建议Serlvet对象中使用实例变量，尽量使用全局变量。
+	8.若希望在WEB服务器启动阶段实例化，要在web.xml文件中进行相关配置<load-on-startup>
+	构造方法先被执行，init在后执行
+	例：
+	<servlet>
+			<servlet-name>lifeCycle</servlet-name>
+			<servlet-class>com.chenyue.servlet.TestLifeCycle</servlet-class>
+			<load-on-startup>1</load-on-startup>//从0开始越小Servlet对象越早被创建，但都会被创建
+	</servlet>
+	<servlet-mapping>
+			<servlet-name>lifeCycle</servlet-name>
+			<url-pattern>/testLifeCycle</url-pattern>
+	</servlet-mapping>	
+	9.Servlet对象实例化后，这个Servlet对象被存储到哪儿了？
+		大多的WEB容器都是将这个Servlet对象及其相对应的url-pattern存储到Map集合中了：
+				Map<String,Servlet>集合
+				key					value
+				---------------------------------
+				/login				LoginServlet对象引用
+				/delete			DeleteServlet对象引用
+				/save				SaveServlet对象引用
+	10.服务器在启动的时候回解析各个webapp的web.xml文件，做了什么？
+		将web.xml文件中的url-pattern和对应的Serlvet完整类名存储到Map集合中了：
+				Map<String,String>	集合
+				key					value
+				----------------------------------
+				/login				com.chenyue.servlet.LoginServlet
+				/delete			com.chenyue.servlet.DeleteServlet
+				/save				com.chenyue.servlet.SaveServlet
+				......
+	11.Servlet接口中的这些方法中编写什么代码？什么时候使用这些方法？
+		1）无参构造方法
+		2）init方法
+				以上两个方法执行时间几乎是相同的，执行次数都是一次，构造方法执行时对象正在创建，init方法执行时对象已经创建
+				若系统要求对象创建时执行一段特殊的程序，这个程序尽量写到init方法中，不建议将代码编写到构造函数，存在风险！
+				当程序员编写构造方法时，可能导致无参数构造方法不存在，一个类不编写任何构造函数，默认就有一个无参的构造方法，
+				但一旦编写一个有参的构造方法后，系统不再提供无参的构造方法。
+				Servlet中的init方法时Sun公司为javaweb程序员专门提供的一个初始化时刻
+		3）service方法
+				这个方法时必然被重写的，因为这个方法需要完成业务逻辑，请求的出来，以及完成响应。而且这个方法中的代码是最有价值的
+				也是最难写的，因为最难编写的就是业务代码。
+		4）destroy方法
+				这个方法也就SUN公司为javaweb程序员提供的一个特殊的时刻，这个特殊的时刻被称为对象销毁时刻，若希望在销毁的时刻执行
+				一段特殊的代码，若需要在销毁时间执行一段特殊的代码，若需要将这段代码编写到destroy方法，自动被调用。
+		回顾：
+			类加载时执行程序，代码写在哪儿了？
+					编写到静态代码块中。
+		结论：
+			sun公司为我们程序员提供了很多不同的时刻。若在这个特殊的时刻执行特殊的程序，这些程序是有位置的编写。
+		
+	

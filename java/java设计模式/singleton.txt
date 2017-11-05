@@ -1,0 +1,92 @@
+package singleton;package singleton;package singleton;import java.io.BufferedReader;import java.io.BufferedWriter;import java.io.FileNotFoundException;import java.io.FileReader;import java.io.FileWriter;import java.io.IOException;public class Singleton {	/*	 * 饿汉模式	 *///	private Singleton(){}//	private static final Singleton SINGLETON = new Singleton();//	public static Singleton getInstance(){//		return SINGLETON;//	}	/*	 * 懒汉模式（非线程安全）	 */	private Singleton(){}	private static Singleton singleton = null;	public static Singleton getInstance(){		if (singleton == null) {			singleton = new Singleton();		}		return singleton;	}//	public static synchronized Singleton getInstance() {  //        if (singleton == null) {    //            singleton = new Singleton();  //        }    //       return singleton;  //	}	//	public static Singleton getInstance() {  //        if (singleton == null) {    //            synchronized (Singleton.class) {    //               if (singleton == null) {    //                  singleton = new Singleton();   //               }    //            }    //        }    //        return singleton;   //    }//	public class Singleton {    //	    private static class LazyHolder {    //	       private static final Singleton INSTANCE = new Singleton();    //	    }    //	    private Singleton (){}    //	    public static final Singleton getInstance() {    //	       return LazyHolder.INSTANCE;    //	    }    //	} 	public static void main(String[] args) {		BufferedReader bufferedReader = null;		BufferedWriter bufferedWriter = null;		try {			bufferedReader = new BufferedReader(new FileReader("src\\singleton/Singleton.java"));			bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Administrator.ZX-201608130143\\Desktop\\singleton.txt",true));			String temp ;			while ((temp = bufferedReader.readLine()) != null) {				bufferedWriter.write(temp);			}		} catch (FileNotFoundException e) {			// TODO Auto-generated catch block			e.printStackTrace();		} catch (IOException e) {			// TODO Auto-generated catch block			e.printStackTrace();		} finally {			if (bufferedReader != null) {				try {					bufferedReader.close();				} catch (IOException e) {					// TODO Auto-generated catch block					e.printStackTrace();				}			}			if (bufferedWriter != null) {				try {					bufferedWriter.close();				} catch (IOException e) {					// TODO Auto-generated catch block					e.printStackTrace();				}			}		}	}}package singleton;
+
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Singleton {
+	/*
+	 * 饿汉模式
+	 */
+//	private Singleton(){}
+//	private static final Singleton SINGLETON = new Singleton();
+//	public static Singleton getInstance(){
+//		return SINGLETON;
+//	}
+	/*
+	 * 懒汉模式（非线程安全）
+	 */
+	private Singleton(){}
+	private static Singleton singleton = null;
+	public static Singleton getInstance(){
+		if (singleton == null) {
+			singleton = new Singleton();
+		}
+		return singleton;
+	}
+//	public static synchronized Singleton getInstance() {  
+//        if (singleton == null) {    
+//            singleton = new Singleton();  
+//        }    
+//       return singleton;  
+//	}	
+//	public static Singleton getInstance() {  
+//        if (singleton == null) {    
+//            synchronized (Singleton.class) {    
+//               if (singleton == null) {    
+//                  singleton = new Singleton();   
+//               }    
+//            }    
+//        }    
+//        return singleton;   
+//    }
+//	public class Singleton {    
+//	    private static class LazyHolder {    
+//	       private static final Singleton INSTANCE = new Singleton();    
+//	    }    
+//	    private Singleton (){}    
+//	    public static final Singleton getInstance() {    
+//	       return LazyHolder.INSTANCE;    
+//	    }    
+//	} 
+	public static void main(String[] args) {
+		BufferedReader bufferedReader = null;
+		BufferedWriter bufferedWriter = null;
+		try {
+			bufferedReader = new BufferedReader(new FileReader("src\\singleton/Singleton.java"));
+			bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Administrator.ZX-201608130143\\Desktop\\singleton.txt",true));
+			String temp ;
+			while ((temp = bufferedReader.readLine()) != null) {
+				bufferedWriter.write(temp);
+				bufferedWriter.newLine();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (bufferedReader != null) {
+				try {
+					bufferedReader.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (bufferedWriter != null) {
+				try {
+					bufferedWriter.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}
